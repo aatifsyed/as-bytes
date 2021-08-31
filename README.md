@@ -8,4 +8,43 @@
 
 # `as-bytes`
 
-A tiny crate, which provides slices to the memory which backs an instance of a struct
+A tiny crate, which provides slices to the memory which backs an instance of a struct.
+
+```rust
+use as_bytes::AsBytes;
+let i = u32::MAX;
+let bytes = unsafe { i.as_bytes() };
+assert_eq!(bytes, [255, 255, 255, 255]);
+```
+You can use this to peek at structure layout.
+One usecase is for testing sending structs sent the wire.
+The below examples demonstrate two different packing attributes on the same structure.
+```rust
+
+let packed = ReprPacked {
+    a: usize::MAX,
+    b: 0u8,
+    c: usize::MAX,
+};
+let bytes = unsafe { packed.as_bytes() };
+assert_eq!(
+    bytes,
+    [255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 255, 255, 255, 255, 255, 255, 255]
+);
+```
+
+```rust
+
+let packed = ReprC {
+    a: usize::MAX,
+    b: 0u8,
+    c: usize::MAX,
+};
+let bytes = unsafe { packed.as_bytes() };
+assert_eq!(
+    bytes,
+    [
+        255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255
+    ]
+);
+```

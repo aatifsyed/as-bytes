@@ -1,11 +1,11 @@
 [package]
 name = "as-bytes"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2018"
 license = "MIT"
 description = "Get the memory underlying a struct"
-repository = "https://github.com/aatifsyed/bitbag"
-documentation = "https://docs.rs/bitbag"
+repository = "https://github.com/aatifsyed/as-bytes"
+documentation = "https://docs.rs/as-bytes"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
